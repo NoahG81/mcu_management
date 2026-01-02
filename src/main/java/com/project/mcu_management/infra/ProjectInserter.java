@@ -1,6 +1,6 @@
 package com.project.mcu_management.infra;
 
-import com.project.mcu_management.domain.Project;
+import com.project.mcu_management.domain.object.Project;
 import com.project.mcu_management.domain.spi.InsertProject;
 import com.project.mcu_management.infra.mapper.ProjectMapper;
 import com.project.mcu_management.infra.repository.ProjectRepository;

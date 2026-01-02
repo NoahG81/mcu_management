@@ -1,6 +1,5 @@
 package com.project.mcu_management.infra.entity;
 
-import com.project.mcu_management.infra.entity.type.MediaTypeEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,13 +22,16 @@ public class ProjectEntity {
     private String typeMedia;
     @Column(name = "id_phase")
     private Long idPhase;
+    private String universe;
+    @Column(name = "importance_id")
+    private Integer importanceId;
 
     public ProjectEntity(){
 
     }
 
     public ProjectEntity(String titre, byte[] affiche, int ordreVisionnage, int dureeMinute,
-                         String dateSortie, String typeMedia, Long idPhase) {
+                         String dateSortie, String typeMedia, Long idPhase, String universe, Integer importanceId) {
         this.titre = titre;
         this.affiche = affiche;
         this.ordreVisionnage = ordreVisionnage;
@@ -37,6 +39,8 @@ public class ProjectEntity {
         this.dateSortie = dateSortie;
         this.typeMedia = typeMedia;
         this.idPhase = idPhase;
+        this.universe = universe;
+        this.importanceId = importanceId;
     }
 
     public Long getId() {
@@ -71,6 +75,14 @@ public class ProjectEntity {
         return idPhase;
     }
 
+    public String getUniverse() {
+        return universe;
+    }
+
+    public Integer getImportanceId() {
+        return importanceId;
+    }
+
     public void setTitre(String titre) {
         this.titre = titre;
     }
@@ -97,5 +109,13 @@ public class ProjectEntity {
 
     public void setTypeMedia(String typeMedia) {
         this.typeMedia = typeMedia;
+    }
+
+    public void setUniverse(String universe) {
+        this.universe = universe;
+    }
+
+    public void setImportanceId(Integer importanceId) {
+        this.importanceId = importanceId;
     }
 }
