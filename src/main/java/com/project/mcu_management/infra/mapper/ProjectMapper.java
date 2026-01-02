@@ -15,7 +15,7 @@ public class ProjectMapper {
         projectEntity.setDateSortie(media.dateSortie());
         projectEntity.setDureeMinute(media.dureeMinutes());
         projectEntity.setOrdreVisionnage(media.ordreVisionnage());
-        projectEntity.setTypeMedia(mapMediaType(media.typeMedia()));
+        projectEntity.setTypeMedia(mapMediaType(media.typeMedia()).getValue());
         projectEntity.setIdPhase(media.phaseId());
         return projectEntity;
     }
@@ -24,6 +24,20 @@ public class ProjectMapper {
         return switch (mediaTypeBean) {
             case FILM -> MediaTypeEntity.FILM;
             case SERIE -> MediaTypeEntity.SERIE;
+        };
+    }
+
+    public Project mapToDomain(ProjectEntity media) {
+        return new Project(media.getTitre(), media.getOrdreVisionnage(), media.getDureeMinute(),
+                media.getDateSortie(),
+                mapMediaTypeToDomain(MediaTypeEntity.getMediaTypeEntity(media.getTypeMedia())),
+                media.getIdPhase(), media.getAffiche());
+    }
+
+    private MediaType mapMediaTypeToDomain(MediaTypeEntity mediaTypeBean) {
+        return switch (mediaTypeBean) {
+            case FILM -> MediaType.FILM;
+            case SERIE -> MediaType.SERIE;
         };
     }
 }

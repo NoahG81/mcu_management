@@ -6,15 +6,30 @@ import com.project.mcu_management.domain.MediaType;
 import com.project.mcu_management.domain.Project;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public record ProjectBeanMapper() {
-    public Project map(ProjectBean media) {
+    public Project mapToDomain(ProjectBean media) {
         return new Project(media.titre(), media.ordreVisionnage(), media.dureeMinutes(),
-                media.dateSortie().toString(), mapMediaType(media.typeMedia()), media.phaseId(),
+                media.dateSortie().toString(), mapMediaTypetoDomain(media.typeMedia()), media.phaseId(),
                 media.affiche());
     }
 
-    private MediaType mapMediaType(MediaTypeBean mediaTypeBean) {
+    public ProjectBean map(Project media) {
+        return new ProjectBean(media.titre(), media.ordreVisionnage(), media.dureeMinutes(),
+                LocalDate.parse(media.dateSortie()), mapMediaType(media.typeMedia()), media.phaseId(),
+                media.affiche());
+    }
+
+    private MediaTypeBean mapMediaType(MediaType mediaType) {
+        return switch (mediaType) {
+            case FILM -> MediaTypeBean.FILM;
+            case SERIE -> MediaTypeBean.SERIE;
+        };
+    }
+
+    private MediaType mapMediaTypetoDomain(MediaTypeBean mediaTypeBean) {
         return switch (mediaTypeBean) {
             case FILM -> MediaType.FILM;
             case SERIE -> MediaType.SERIE;

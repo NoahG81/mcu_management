@@ -4,6 +4,7 @@ import com.project.mcu_management.infra.entity.type.MediaTypeEntity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "projet")
 public class ProjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,12 +15,12 @@ public class ProjectEntity {
     private byte[] affiche;
     @Column(name = "ordre_visionnage")
     private int ordreVisionnage;
-    @Column(name = "duree_minute")
+    @Column(name = "duree_minutes")
     private int dureeMinute;
     @Column(name = "date_sortie")
     private String dateSortie;
     @Column(name = "type_media")
-    private MediaTypeEntity typeMedia;
+    private String typeMedia;
     @Column(name = "id_phase")
     private Long idPhase;
 
@@ -28,7 +29,7 @@ public class ProjectEntity {
     }
 
     public ProjectEntity(String titre, byte[] affiche, int ordreVisionnage, int dureeMinute,
-                         String dateSortie, MediaTypeEntity typeMedia, Long idPhase) {
+                         String dateSortie, String typeMedia, Long idPhase) {
         this.titre = titre;
         this.affiche = affiche;
         this.ordreVisionnage = ordreVisionnage;
@@ -62,7 +63,7 @@ public class ProjectEntity {
         return dateSortie;
     }
 
-    public MediaTypeEntity getTypeMedia() {
+    public String getTypeMedia() {
         return typeMedia;
     }
 
@@ -94,7 +95,7 @@ public class ProjectEntity {
         this.idPhase = idPhase;
     }
 
-    public void setTypeMedia(MediaTypeEntity typeMedia) {
+    public void setTypeMedia(String typeMedia) {
         this.typeMedia = typeMedia;
     }
 }
